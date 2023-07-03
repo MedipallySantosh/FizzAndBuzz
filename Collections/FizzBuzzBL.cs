@@ -62,6 +62,6 @@ namespace FizzAndBuzz.Collections
         public const string Fizz = "Fizz";
         public const string Buzz = "Buzz";
         public const string NumberOfChars = "Please enter up to 50 characters";
-        public const string NotDivisibleByThreeOrFive = "Entered {0} is not divisible by 3 or 5";
+        public const string NotDivisibleByThreeOrFive = "Entered Value is not divisible by 3 or 5";
     }
 }

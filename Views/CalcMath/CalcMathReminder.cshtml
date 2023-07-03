@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Fizz Buzz";
+}
+
+<div class="text-center">
+    <h4 class="display-4">Fizz Buzz</h4>
+    @model FizzAndBuzz.Models.FizzBuzzModel_Calculate
+    @using (Html.BeginForm())
+    {
+        <br />
+        <div>
+            @Html.Label("Enter Numbers separated by comma ") &nbsp;  &nbsp; :
+            @Html.TextBoxFor(m => m.InputNumbers)
+        </div>
+        <br />
+        <div>
+            <button type="submit" class="btn btn-dark">Caliculate</button> &nbsp;
+            <button type="reset" class="btn btn-light" asp-action="Reset">Clear</button>
+        </div>
+    }
+
+    @if (Model.OutputValues != null && Model.OutputValues.Length > 0)
+    {
+        <strong>Result: </strong> <br />
+        @foreach (string outputValue in Model.OutputValues)
+        {
+            @outputValue     <br />
+        }
+    }
+
+</div>
+
+
+namespace FizzAndBuzz.Views.CalcMath
+{
+    public class CalcMathReminder
+    {
+    }
+}

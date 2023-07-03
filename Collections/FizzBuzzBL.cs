@@ -1,25 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Web;
-namespace FizzAndBuzz.Collections
+﻿namespace FizzAndBuzz.Collections
 {
-    public class FizzBuzzBL:IFizzBuzzBL
+    public class FizzBuzzBL : IFizzBuzzBL
     {
-        private IReminder _reminder;
-        public FizzBuzzBL()
+        private readonly IReminder _reminder;
+
+        /// <summary>
+        /// Constructor Injection
+        /// </summary>
+        /// <param name="Reminder"></param>
+        public FizzBuzzBL(IReminder Reminder)
         {
-            _reminder = new Reminder();
+            _reminder = Reminder;
         }
 
+        /// <summary>
+        /// Logic of divisible by 3 and 5
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        
         public string ArryValues(string value)
         {
             string result = string.Empty;
             int number;
             if (int.TryParse(value, out number))
             {
-                if (_reminder.GetReminder(number, 3) == 0 && _reminder.GetReminder(number, 5) == 0)
+                if (_reminder.GetReminder(number, 15) == 0) //divisible by both 3 and 5
                     result = FBConstants.FizzBuzz;
                 else if (_reminder.GetReminder(number, 3) == 0)
                     result = FBConstants.Fizz;
@@ -36,6 +42,10 @@ namespace FizzAndBuzz.Collections
             return result;
         }
     }
+
+    /// <summary>
+    /// Interface declarations
+    /// </summary>
     public interface IReminder
     {
         public decimal GetReminder(int divisor, int quotient);
@@ -46,6 +56,9 @@ namespace FizzAndBuzz.Collections
         public string ArryValues(string value);
     }
 
+    /// <summary>
+    /// Class declarations
+    /// </summary>
     public class Reminder : IReminder
     {
         public decimal GetReminder(int divisor, int quotient)
@@ -54,9 +67,12 @@ namespace FizzAndBuzz.Collections
         }
     }
 
+    /// <summary>
+    /// Constant values
+    /// </summary>
     public class FBConstants
     {
-        public const string InvalidValue = "Invalid entry!! Please enter nubers separated by commas.";
+        public const string InvalidValue = "Invalid entry.";
         public const string Message = "Divided {0} by {1}";
         public const string FizzBuzz = "FizzBuzz";
         public const string Fizz = "Fizz";

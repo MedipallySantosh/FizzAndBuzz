@@ -2,21 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using FizzAndBuzz.Collections;
-using System;
-using System.Collections.Generic;
-using Microsoft.VisualBasic;
 
 namespace FizzAndBuzz.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-        private IFizzBuzzBL _fizzBuzzBL;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IFizzBuzzBL _fizzBuzzBL;
+        /// <summary>
+        /// Constructor Injection
+        /// </summary>
+        /// <param name="fizzBuzzBL"></param>
+        public HomeController( IFizzBuzzBL fizzBuzzBL)
         {
-            _logger = logger;
-            _fizzBuzzBL = new FizzBuzzBL();
+            _fizzBuzzBL = fizzBuzzBL;
         }
 
         public IActionResult Index()
@@ -44,11 +42,9 @@ namespace FizzAndBuzz.Controllers
                         model.OutputValues = outputList.ToArray();
                         return View(model);
                     }
-                   // FizzBuzzBL fizzBuzz = new FizzBuzzBL();
                     foreach (string value in valuesArray)
                         outputList.Add(value + " - " + _fizzBuzzBL.ArryValues(value));
 
-                    // Store the divisions performed 
                     model.OutputValues = outputList.ToArray();
                 }
                 catch (Exception ex)
